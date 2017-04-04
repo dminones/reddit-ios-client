@@ -29,11 +29,9 @@ class TopListViewController: UITableViewController {
                 let jsonData = try NSData(contentsOfFile: path, options: NSData.ReadingOptions.mappedIfSafe)
                 do {
                     let jsonResult: NSDictionary = try JSONSerialization.jsonObject(with: jsonData as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
-                    NSLog("json result: %@",jsonResult)
                     if let data : NSDictionary = jsonResult["data"] as? NSDictionary {
                         if let children : [NSDictionary] = data["children"] as? [NSDictionary] {
                             links = children
-                            NSLog("children %@", links)
                         }
                     }
                 } catch {}
@@ -56,12 +54,18 @@ class TopListViewController: UITableViewController {
         
         // create a new cell if needed or reuse an old one
         let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
+        cell.textLabel?.numberOfLines = 0;
+        cell.textLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         
         // set the text from the data model
         let link = self.links[indexPath.row] as NSDictionary
         let linkData = link["data"] as! NSDictionary!
         
         cell.textLabel?.text = linkData?["title"] as? String
+        cell.imageView?.image = UIImage(named: "default.png")
+        if let thumbnail = linkData?["thumbnail"] as? String {
+            cell.imageView?.downloadedFrom(link: thumbnail)
+        }
         
         return cell
     }
