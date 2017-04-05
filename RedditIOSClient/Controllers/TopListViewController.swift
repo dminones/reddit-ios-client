@@ -20,24 +20,11 @@ class TopListViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 80;
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         
-        //Get top links from file
-        if let path = Bundle.main.path(forResource: "top", ofType: "json") {
-            do {
-                let jsonData = try NSData(contentsOfFile: path, options: NSData.ReadingOptions.mappedIfSafe)
-                do {
-                    let jsonResult: NSDictionary = try JSONSerialization.jsonObject(with: jsonData as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
-                    if let data : NSDictionary = jsonResult["data"] as? NSDictionary {
-                        if let children : [NSDictionary] = data["children"] as? [NSDictionary] {
-                            for item in children {
-                                if  let link = Link(json: item as! [String : Any]) {
-                                    links.append(link)
-                                }
-                            }
-                        }
-                    }
-                } catch {}
-            } catch {}
-        }
+        let redditClient = RedditApiClient()
+        redditClient.getTopLinks(successHandler: {(links) in
+            self.links = links
+            self.tableView.reloadData()
+        })
     }
 
     override func didReceiveMemoryWarning() {
