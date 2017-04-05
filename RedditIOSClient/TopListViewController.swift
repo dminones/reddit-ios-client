@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 class TopListViewController: UITableViewController {
-    var links : [NSDictionary] = []
+    var links : [Link] = []
     // cell reuse id (cells that scroll out of view can be reused)
     let cellReuseIdentifier = "cell"
     
@@ -31,7 +31,11 @@ class TopListViewController: UITableViewController {
                     let jsonResult: NSDictionary = try JSONSerialization.jsonObject(with: jsonData as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
                     if let data : NSDictionary = jsonResult["data"] as? NSDictionary {
                         if let children : [NSDictionary] = data["children"] as? [NSDictionary] {
-                            links = children
+                            for item in children {
+                                if  let link = Link(json: item as! [String : Any]) {
+                                    links.append(link)
+                                }
+                            }
                         }
                     }
                 } catch {}
@@ -58,15 +62,14 @@ class TopListViewController: UITableViewController {
         cell.textLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         
         // set the text from the data model
-        let link = self.links[indexPath.row] as NSDictionary
-        let linkData = link["data"] as! NSDictionary!
+        let link = self.links[indexPath.row] as Link
         
-        cell.textLabel?.text = linkData?["title"] as? String
+        cell.textLabel?.text = link.title
         cell.imageView?.image = UIImage(named: "default.png")
-        if let thumbnail = linkData?["thumbnail"] as? String {
+        if let thumbnail = link.thumbnail {
             cell.imageView?.downloadedFrom(link: thumbnail)
         }
-        
+
         return cell
     }
     
