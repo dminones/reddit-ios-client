@@ -19,7 +19,7 @@ class LinkTableViewCell : UITableViewCell {
             let link = self.link!
             
             self.title?.text = link.title
-            self.subtitle?.text = "posted by \(link.author)"
+            self.subtitle?.text = "posted by \(link.author) a \(timeAgoSince(link.createdUTC as Date))"
             self.comments?.text = "\(link.numComments) comments so far"
             
             if let thumbnail = link.thumbnail {

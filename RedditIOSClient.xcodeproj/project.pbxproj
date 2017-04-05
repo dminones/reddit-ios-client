@@ -18,6 +18,7 @@
 		A3F54FCE1E945F9F008DB1BF /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F54FCD1E945F9F008DB1BF /* default.png */; };
 		A3F54FD31E9467DC008DB1BF /* Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F54FD21E9467DC008DB1BF /* Link.swift */; };
 		A3F54FD51E94858C008DB1BF /* LinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F54FD41E94858C008DB1BF /* LinkTableViewCell.swift */; };
+		A3F54FD71E94A2B7008DB1BF /* TimeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F54FD61E94A2B7008DB1BF /* TimeAgo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		A3F54FCD1E945F9F008DB1BF /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 		A3F54FD21E9467DC008DB1BF /* Link.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Link.swift; sourceTree = "<group>"; };
 		A3F54FD41E94858C008DB1BF /* LinkTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkTableViewCell.swift; sourceTree = "<group>"; };
+		A3F54FD61E94A2B7008DB1BF /* TimeAgo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeAgo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			children = (
 				A3F54FC91E9457DF008DB1BF /* top.json */,
 				A3F54FD21E9467DC008DB1BF /* Link.swift */,
+				A3F54FD61E94A2B7008DB1BF /* TimeAgo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			files = (
 				A3DF6CE91E9454EA003C4B9C /* TopListViewController.swift in Sources */,
 				A3DF6CE71E9454EA003C4B9C /* AppDelegate.swift in Sources */,
+				A3F54FD71E94A2B7008DB1BF /* TimeAgo.swift in Sources */,
 				A3F54FCC1E945C99008DB1BF /* UIImageView+DownloadImage.swift in Sources */,
 				A3F54FD31E9467DC008DB1BF /* Link.swift in Sources */,
 				A3F54FD51E94858C008DB1BF /* LinkTableViewCell.swift in Sources */,
