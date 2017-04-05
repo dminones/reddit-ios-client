@@ -12,16 +12,13 @@ import Foundation
 class TopListViewController: UITableViewController {
     var links : [Link] = []
     // cell reuse id (cells that scroll out of view can be reused)
-    let cellReuseIdentifier = "cell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.title = "Top"
-        
-        // Register the table view cell class and its reuse id
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-
+        self.tableView.estimatedRowHeight = 80;
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
         
         //Get top links from file
         if let path = Bundle.main.path(forResource: "top", ofType: "json") {
@@ -55,21 +52,10 @@ class TopListViewController: UITableViewController {
     
     // create a cell for each table view row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LinkTableViewCell
         
-        // create a new cell if needed or reuse an old one
-        let cell:UITableViewCell = self.tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier) as UITableViewCell!
-        cell.textLabel?.numberOfLines = 0;
-        cell.textLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
-        
-        // set the text from the data model
-        let link = self.links[indexPath.row] as Link
-        
-        cell.textLabel?.text = link.title
-        cell.imageView?.image = UIImage(named: "default.png")
-        if let thumbnail = link.thumbnail {
-            cell.imageView?.downloadedFrom(link: thumbnail)
-        }
-
+        cell.link = self.links[indexPath.row]
+        cell.layoutIfNeeded()
         return cell
     }
     
@@ -77,6 +63,7 @@ class TopListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
     }
+
 
 }
 
