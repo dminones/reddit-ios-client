@@ -15,10 +15,42 @@ class RedditApiClient {
     private let clientId : String
     private let secret : String
     private let deviceId: String
+   
+    private var accessToken: String?{
+        get {
+            return (UserDefaults.standard.object(forKey: "access_token") as? String?)!
+        }
+        
+        set {
+            let defaults = UserDefaults.standard
+            defaults.set(newValue, forKey: "access_token")
+            defaults.synchronize()
+        }
+    }
     
-    private var accessToken : String?
-    private var expires : Date?
-    private var tokenType : String?
+    private var expires: Date?{
+        get {
+            return (UserDefaults.standard.object(forKey: "expires") as? Date?)!
+        }
+        
+        set {
+            let defaults = UserDefaults.standard
+            defaults.set(newValue, forKey: "expires")
+            defaults.synchronize()
+        }
+    }
+    
+    private var tokenType: String?{
+        get {
+            return (UserDefaults.standard.object(forKey: "token_type") as? String?)!
+        }
+        
+        set {
+            let defaults = UserDefaults.standard
+            defaults.set(newValue, forKey: "token_type")
+            defaults.synchronize()
+        }
+    }
     
     init() {
         self.clientId = "ywRkiJsL1jOVng"
@@ -29,6 +61,12 @@ class RedditApiClient {
     //Result
     //{"access_token": "I4roYRyYERr-QLVyLJkV2urqnlY", "token_type": "bearer", "device_id": "DO_NOT_TRACK_THIS_DEVICE", "expires_in": 3600, "scope": "*"}
     func authorize(successHandler: @escaping () -> Swift.Void) {
+        //If already authorized and token not expired shouldn't ask for a new token
+        if((self.accessToken != nil) && (self.expires != nil) && (self.expires! > Date())) {
+            successHandler()
+            return
+        }
+        
         var request = URLRequest(url: URL(string: "https://www.reddit.com/api/v1/access_token")!)
         
         let loginString = String(format: "%@:%@", self.clientId, self.secret)

@@ -23,7 +23,9 @@ class TopListViewController: UITableViewController {
         let redditClient = RedditApiClient()
         redditClient.getTopLinks(successHandler: {(links) in
             self.links = links
-            self.tableView.reloadData()
+            DispatchQueue.main.async() {
+                self.tableView.reloadData()
+            }
         })
     }
 
