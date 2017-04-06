@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 class TopListViewController: UITableViewController {
-    var links : [Link] = []
+    var listing = Listing()
     // cell reuse id (cells that scroll out of view can be reused)
     
     /// View which contains the loading text and the spinner
@@ -52,14 +52,14 @@ class TopListViewController: UITableViewController {
     
     // number of rows in table view
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.links.count
+        return self.listing.children.count
     }
     
     // create a cell for each table view row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LinkTableViewCell
         
-        cell.link = self.links[indexPath.row]
+        cell.link = self.listing.children[indexPath.row]
         cell.layoutIfNeeded()
         return cell
     }
@@ -76,8 +76,8 @@ class TopListViewController: UITableViewController {
     private func loadData(sender: UIRefreshControl? = nil) {
         
         let redditClient = RedditApiClient()
-        redditClient.getTopLinks(successHandler: {(links) in
-            self.links = links
+        redditClient.getTopLinks(successHandler: {(listing) in
+            self.listing = listing
             DispatchQueue.main.async() {
                 self.tableView.reloadData()
                 if let refreshControl = sender {

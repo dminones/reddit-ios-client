@@ -120,8 +120,7 @@ class RedditApiClient {
         task.resume()
     }
     
-    func getTopLinks (successHandler: @escaping ([Link]) -> Swift.Void) {
-        var links : [Link] = []
+    func getTopLinks (successHandler: @escaping (Listing) -> Swift.Void) {
         
         self.authorize(successHandler: { () in
             var request = URLRequest(url: URL(string: "\(RedditApiClient.url)/top.json")!)
@@ -144,14 +143,8 @@ class RedditApiClient {
                 do {
                     let jsonResult: NSDictionary = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
                     if let data : NSDictionary = jsonResult["data"] as? NSDictionary {
-                        if let children : [NSDictionary] = data["children"] as? [NSDictionary] {
-                            for item in children {
-                                if  let link = Link(json: item as! [String : Any]) {
-                                    links.append(link)
-                                }
-                            }
-                            successHandler(links)
-                        }
+                        let listing = Listing(json: data as! [String : Any])
+                        successHandler(listing!)
                     }
                 } catch {}
                 return
