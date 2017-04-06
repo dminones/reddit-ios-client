@@ -12,6 +12,7 @@ struct Link {
     let title: String
     let author: String
     let thumbnail: String?
+    let url: String
     let createdUTC: NSDate
     let numComments: Int
 }
@@ -22,6 +23,7 @@ extension Link {
         guard let title = jsonData?["title"] as? String,
             let author = jsonData?["author"] as? String,
             let thumbnail = jsonData?["thumbnail"] as? String,
+            let url = jsonData?["url"] as? String,
             let createdUTC = jsonData?["created_utc"] as? Int,
             let numComments = jsonData?["num_comments"] as? Int
             else {
@@ -32,6 +34,7 @@ extension Link {
         self.title = title
         self.author = author
         self.thumbnail = thumbnail
+        self.url = url
         self.createdUTC = NSDate(timeIntervalSince1970: Double(createdUTC))
         self.numComments = numComments
     }

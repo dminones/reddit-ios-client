@@ -105,11 +105,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WgZ-XP-t50">
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WgZ-XP-t50">
                                             <rect key="frame" x="177" y="12" width="20" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </activityIndicatorView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="WgZ-XP-t50" firstAttribute="centerX" secondItem="ckY-h3-pF7" secondAttribute="centerX" id="V3u-Bm-ayr"/>
+                                        <constraint firstItem="WgZ-XP-t50" firstAttribute="centerY" secondItem="ckY-h3-pF7" secondAttribute="centerY" id="mC2-CX-NMQ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -121,6 +124,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="U2l-6i-gdr"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="cJ1-3w-q8q">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <attributedString key="attributedTitle"/>
                     </refreshControl>
@@ -128,6 +132,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ILV-Cy-FnG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1184.8" y="209.14542728635683"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="xgp-rC-h1w">
+            <objects>
+                <viewController restorationIdentifier="WebViewController" storyboardIdentifier="WebViewController" id="ZjW-9g-dz7" customClass="WebViewController" customModule="RedditIOSClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hQD-OT-kPN"/>
+                        <viewControllerLayoutGuide type="bottom" id="T61-cr-nvq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wDW-Ve-BG5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wFi-ur-xoO">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wFi-ur-xoO" firstAttribute="bottom" secondItem="T61-cr-nvq" secondAttribute="top" id="3t8-Qj-bgp"/>
+                            <constraint firstAttribute="trailing" secondItem="wFi-ur-xoO" secondAttribute="trailing" id="4ma-TH-sso"/>
+                            <constraint firstItem="wFi-ur-xoO" firstAttribute="leading" secondItem="wDW-Ve-BG5" secondAttribute="leading" id="Dfv-lY-4TK"/>
+                            <constraint firstItem="wFi-ur-xoO" firstAttribute="top" secondItem="wDW-Ve-BG5" secondAttribute="top" id="jjU-bD-U6M"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="wFi-ur-xoO" id="0zu-8h-FCM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hsg-Y9-NvF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2028" y="208"/>
         </scene>
     </scenes>
     <resources>
