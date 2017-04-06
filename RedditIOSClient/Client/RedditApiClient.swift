@@ -58,11 +58,13 @@ class RedditApiClient {
         self.deviceId = "DO_NOT_TRACK_THIS_DEVICE"
     }
     
-    //Result
-    //{"access_token": "I4roYRyYERr-QLVyLJkV2urqnlY", "token_type": "bearer", "device_id": "DO_NOT_TRACK_THIS_DEVICE", "expires_in": 3600, "scope": "*"}
+    func authorized() -> Bool {
+        return (self.accessToken != nil) && (self.expires != nil) && (self.expires! > Date());
+    }
+    
     func authorize(successHandler: @escaping () -> Swift.Void) {
         //If already authorized and token not expired shouldn't ask for a new token
-        if((self.accessToken != nil) && (self.expires != nil) && (self.expires! > Date())) {
+        if(self.authorized()) {
             successHandler()
             return
         }
@@ -122,11 +124,6 @@ class RedditApiClient {
         var links : [Link] = []
         
         self.authorize(successHandler: { () in
-            print("token: \(String(describing: self.accessToken))")
-            print("expires: \(String(describing: self.expires))")
-            print("tokenType: \(String(describing: self.tokenType))")
-            print("now: \(String(describing: Date()))")
-            
             var request = URLRequest(url: URL(string: "\(RedditApiClient.url)/top.json")!)
             request.httpMethod = "GET"
             request.addValue("\(self.tokenType!) \(self.accessToken!)", forHTTPHeaderField: "Authorization")
