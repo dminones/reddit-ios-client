@@ -120,13 +120,18 @@ class RedditApiClient {
         task.resume()
     }
     
-    func getTopLinks (successHandler: @escaping (Listing) -> Swift.Void) {
+    func getTopLinks (options: Dictionary<String, Any>? = nil, successHandler: @escaping (Listing) -> Swift.Void) {
         
         self.authorize(successHandler: { () in
-            var request = URLRequest(url: URL(string: "\(RedditApiClient.url)/top.json")!)
+            
+            let parameterString = options?.stringFromHttpParameters() ?? ""
+            
+            var request = URLRequest(url: URL(string: "\(RedditApiClient.url)/top.json?\(parameterString)")!)
             request.httpMethod = "GET"
             request.addValue("\(self.tokenType!) \(self.accessToken!)", forHTTPHeaderField: "Authorization")
             request.addValue(RedditApiClient.userAgent, forHTTPHeaderField: "User-Agent")
+            
+            
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let data = data, error == nil else {
                     // check for fundamental networking error

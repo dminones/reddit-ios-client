@@ -54,7 +54,7 @@ class TopListViewController: UITableViewController {
     
     // create a cell for each table view row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row >= self.listing.children.count{
+        if indexPath.row >= (self.listing.children.count){
             return tableView.dequeueReusableCell(withIdentifier: "lastCell", for: indexPath) as! LinkTableViewCell
         }
         
@@ -71,7 +71,7 @@ class TopListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row >= self.listing.children.count {
+        if indexPath.row >= (self.listing.children.count) {
             loadNextPage()
         }
     }
@@ -79,7 +79,7 @@ class TopListViewController: UITableViewController {
     
     // Load data in the tableView
     private func loadData(sender: UIRefreshControl? = nil) {
-        redditClient.getTopLinks(successHandler: {(listing) in
+        redditClient.getTopLinks(options: ["count":"50"],successHandler: {(listing) in
             self.listing = listing
             DispatchQueue.main.async() {
                 self.tableView.reloadData()
@@ -93,7 +93,17 @@ class TopListViewController: UITableViewController {
     
     // Load data in the tableView
     private func loadNextPage() {
-        print("Load next page")
+        
+        if let page = self.listing.after {
+            print("Load next page \(page)")
+            
+            redditClient.getTopLinks(options: ["after":page, "count":"50"], successHandler: {(listing) in
+                self.listing.addAfter(listing)
+                DispatchQueue.main.async() {
+                    self.tableView.reloadData()
+                }
+            })
+        } 
     }
     
     // Set the activity indicator into the main view

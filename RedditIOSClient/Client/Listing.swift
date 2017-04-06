@@ -8,13 +8,15 @@
 
 import Foundation
 
-struct Listing {
+class Listing {
     var before: String?
     var after: String?
     var children = [Link]()
-}
-
-extension Listing {
+    
+    init(){
+        
+    }
+    
     init?(json: [String: Any]) {
         
         if let after = json["after"] as? String? {
@@ -35,4 +37,10 @@ extension Listing {
             self.children = links
         }
     }
+    
+    func addAfter(_ after: Listing) {
+        self.after = after.after
+        self.children.append(contentsOf: after.children)
+    }
 }
+
