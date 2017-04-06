@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 
 class TopListViewController: UITableViewController {
+    let redditClient = RedditApiClient()
     var listing = Listing()
     // cell reuse id (cells that scroll out of view can be reused)
     
@@ -36,11 +37,6 @@ class TopListViewController: UITableViewController {
         self.refreshControl?.addTarget(self, action: #selector(TopListViewController.handleRefresh(sender:)), for: UIControlEvents.valueChanged)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //self.refreshControl?.beginRefreshing()
-    }
-    
     func handleRefresh(sender:UIRefreshControl) {
         self.loadData(sender: sender)
     }
@@ -52,11 +48,16 @@ class TopListViewController: UITableViewController {
     
     // number of rows in table view
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.listing.children.count
+        let offset = (self.listing.after == nil) ? 0 : 1;
+        return self.listing.children.count + offset
     }
     
     // create a cell for each table view row
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row >= self.listing.children.count{
+            return tableView.dequeueReusableCell(withIdentifier: "lastCell", for: indexPath) as! LinkTableViewCell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LinkTableViewCell
         
         cell.link = self.listing.children[indexPath.row]
@@ -68,14 +69,16 @@ class TopListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You tapped cell number \(indexPath.row).")
     }
-
     
-    // MARK: Private methods
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row >= self.listing.children.count {
+            loadNextPage()
+        }
+    }
+
     
     // Load data in the tableView
     private func loadData(sender: UIRefreshControl? = nil) {
-        
-        let redditClient = RedditApiClient()
         redditClient.getTopLinks(successHandler: {(listing) in
             self.listing = listing
             DispatchQueue.main.async() {
@@ -86,7 +89,11 @@ class TopListViewController: UITableViewController {
                 self.removeLoadingScreen()
             }
         })
-        
+    }
+    
+    // Load data in the tableView
+    private func loadNextPage() {
+        print("Load next page")
     }
     
     // Set the activity indicator into the main view
