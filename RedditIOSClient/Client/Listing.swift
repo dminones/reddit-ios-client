@@ -8,13 +8,34 @@
 
 import Foundation
 
-class Listing {
+class Listing: NSObject, NSCoding {
+
     var before: String?
     var after: String?
     var children = [Link]()
     
-    init(){
+    override init(){
+       super.init()
+    }
+    
+    //MARK: NSCoding protocol methods
+    func encode(with aCoder: NSCoder){
+        aCoder.encode(self.before, forKey: "before")
+        aCoder.encode(self.after, forKey: "after")
+        aCoder.encode(self.children, forKey: "children")
+    }
+    
+    required init(coder decoder: NSCoder) {
         
+        if let before = decoder.decodeObject(forKey: "before") as? String{
+            self.before = before
+        }
+        if let after = decoder.decodeObject(forKey: "after") as? String{
+            self.after = after
+        }
+        if let children = decoder.decodeObject(forKey: "children") as? [Link]{
+            self.children = children
+        }
     }
     
     init?(json: [String: Any]) {

@@ -18,7 +18,10 @@ class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveTapped))
-
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if let url = self.url {
             print("image \(url)")
             self.webView.loadRequest(URLRequest(url: URL(string:url)!))
@@ -60,5 +63,15 @@ class WebViewController: UIViewController {
                 
             }).resume()
         }
+    }
+    
+    override func encodeRestorableState(with coder: NSCoder) {
+        coder.encode(self.url, forKey: "url")
+        super.encodeRestorableState(with: coder)
+    }
+    
+    override func decodeRestorableState(with coder: NSCoder) {
+        self.url = coder.decodeObject(forKey:"url") as? String
+        super.decodeRestorableState(with: coder)
     }
 }

@@ -31,10 +31,17 @@ class TopListViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 80;
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         
-        self.setLoadingScreen()
-        self.loadData()
-        
         self.refreshControl?.addTarget(self, action: #selector(TopListViewController.handleRefresh(sender:)), for: UIControlEvents.valueChanged)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if(listing.children.isEmpty) {
+            self.setLoadingScreen()
+            self.loadData()
+        } else {
+            self.tableView.reloadData()
+        }
     }
     
     func handleRefresh(sender:UIRefreshControl) {
@@ -153,6 +160,17 @@ class TopListViewController: UITableViewController {
         // Hides and stops the text and the spinner
         self.spinner.stopAnimating()
         self.loadingLabel.isHidden = true
+    }
+    
+    
+    override func encodeRestorableState(with coder: NSCoder) {
+        coder.encode(self.listing, forKey: "listing")
+        super.encodeRestorableState(with: coder)
+    }
+    
+    override func decodeRestorableState(with coder: NSCoder) {
+        self.listing = coder.decodeObject(forKey:"listing") as? Listing ?? Listing()
+        super.decodeRestorableState(with: coder)
     }
 }
 

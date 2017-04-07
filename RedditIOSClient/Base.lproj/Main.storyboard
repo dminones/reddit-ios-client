@@ -13,7 +13,7 @@
         <!--Navigation Controller-->
         <scene sceneID="3JK-8X-RwH">
             <objects>
-                <navigationController id="SLE-rN-A2R" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="UINavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SLE-rN-A2R" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZfP-yU-VJF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -29,8 +29,8 @@
         <!--Redit Top-->
         <scene sceneID="hLV-4c-Tuv">
             <objects>
-                <tableViewController title="Redit Top" id="bYa-dZ-o19" customClass="TopListViewController" customModule="RedditIOSClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="huH-5b-eav">
+                <tableViewController storyboardIdentifier="TopListViewController" title="Redit Top" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bYa-dZ-o19" customClass="TopListViewController" customModule="RedditIOSClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="UITableView" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" id="huH-5b-eav">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -136,7 +136,7 @@
         <!--Web View Controller-->
         <scene sceneID="xgp-rC-h1w">
             <objects>
-                <viewController restorationIdentifier="WebViewController" storyboardIdentifier="WebViewController" id="ZjW-9g-dz7" customClass="WebViewController" customModule="RedditIOSClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZjW-9g-dz7" customClass="WebViewController" customModule="RedditIOSClient" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hQD-OT-kPN"/>
                         <viewControllerLayoutGuide type="bottom" id="T61-cr-nvq"/>
@@ -145,7 +145,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wFi-ur-xoO">
+                            <webView contentMode="scaleToFill" restorationIdentifier="WebView" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wFi-ur-xoO">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
