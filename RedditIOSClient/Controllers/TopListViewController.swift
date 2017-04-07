@@ -70,9 +70,14 @@ class TopListViewController: UITableViewController {
         print("You tapped cell number \(indexPath.row).")
         
         if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WebViewController") as? WebViewController {
-            viewController.link = self.listing.children[indexPath.row]
-            if let navigator = navigationController {
+            let link = self.listing.children[indexPath.row]
+            if let navigator = navigationController,
+               let imageUrl = link.imageUrl {
+                viewController.url = imageUrl
+                viewController.title = link.title
                 navigator.pushViewController(viewController, animated: true)
+            } else {
+                print("Can't open link named \(link.title)")
             }
         }
     }
