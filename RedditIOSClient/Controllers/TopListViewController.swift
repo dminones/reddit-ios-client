@@ -27,7 +27,7 @@ class TopListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.title = "Top"
+        self.title = "Reddit Top"
         self.tableView.estimatedRowHeight = 80;
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A36E19491E971B6700FF345A /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A36E19481E971B6700FF345A /* logo.png */; };
 		A3C303551E95770A00CF04C4 /* RedditApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C303541E95770A00CF04C4 /* RedditApiClient.swift */; };
 		A3C303571E95D31C00CF04C4 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C303561E95D31C00CF04C4 /* Listing.swift */; };
 		A3DF6CE71E9454EA003C4B9C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3DF6CE61E9454EA003C4B9C /* AppDelegate.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A36E19481E971B6700FF345A /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		A3C303541E95770A00CF04C4 /* RedditApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedditApiClient.swift; sourceTree = "<group>"; };
 		A3C303561E95D31C00CF04C4 /* Listing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 		A3DF6CE31E9454EA003C4B9C /* RedditIOSClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedditIOSClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +141,7 @@
 		A3F54FD11E9466DE008DB1BF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A36E19481E971B6700FF345A /* logo.png */,
 				A3F54FD61E94A2B7008DB1BF /* TimeAgo.swift */,
 				A3F54FCB1E945C99008DB1BF /* UIImageView+DownloadImage.swift */,
 				A3F54FCD1E945F9F008DB1BF /* default.png */,
@@ -234,6 +237,7 @@
 				A3DF6CEE1E9454EA003C4B9C /* Assets.xcassets in Resources */,
 				A3DF6CEC1E9454EA003C4B9C /* Main.storyboard in Resources */,
 				A3F54FCE1E945F9F008DB1BF /* default.png in Resources */,
+				A36E19491E971B6700FF345A /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

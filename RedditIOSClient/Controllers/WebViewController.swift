@@ -23,7 +23,6 @@ class WebViewController: UIViewController {
             print("image \(url)")
             self.webView.loadRequest(URLRequest(url: URL(string:url)!))
         }
-        
     }
     
     func showSimpleAlert (_ title:String, message: String? = nil) {
@@ -60,8 +59,6 @@ class WebViewController: UIViewController {
                 })
                 
             }).resume()
-            
-            
         }
     }
 }
